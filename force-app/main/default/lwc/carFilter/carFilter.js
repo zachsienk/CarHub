@@ -9,6 +9,11 @@ import MAKE_FIELD from '@salesforce/schema/Car__c.Make__c'
 //constants
 const CATEGORY_ERROR = 'Error loading categories'
 const MAKE_ERROR = 'Error loading make'
+
+//Lightning Message Service and message channel
+import{publish, MessageContext} from 'lightning/messageService'
+import CARS_FILTERED_MESSAGE from  '@salesforce/messageChannel/carsFiltered__c'
+
 export default class CarFilter extends LightningElement {
 
     //create an object to use to store the values in from the HTML
@@ -19,6 +24,9 @@ export default class CarFilter extends LightningElement {
     cateogryError = CATEGORY_ERROR;
     makeError = MAKE_ERROR;
 
+    //** Load context for LMS */
+    @wire(MessageContext)
+    messageContext
     //***fetching Category picklist */
     @wire(getObjectInfo, {objectApiName:CAR_OBJECT})
     carObjectInfo
@@ -41,6 +49,7 @@ export default class CarFilter extends LightningElement {
     handleSearchKeyChange(event){
         console.log(event.target.value)
         this.filters ={...this.filters, "searchKey":event.target.value}
+        this.sendDataToCarList();
     }
 
 
@@ -55,8 +64,14 @@ export default class CarFilter extends LightningElement {
 
     handleCheckbox(event){
         const {name, value} = event.target.dataset
-        console.log("name", value)
-        console.log("value", name)
+        console.log("name", name)
+        console.log("value", value)
 
+    }
+
+    sendDataToCarList(){
+        publish(this.messageContext, CARS_FILTERED_MESSAGE, {
+            filters:this.filters
+        })
     }
 }

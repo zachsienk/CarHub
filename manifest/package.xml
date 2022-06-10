@@ -30,6 +30,9 @@
     </types>
     <types>
         <members>*</members>
+        <name>LightningMessageChannel</name>
+    <types>
+        <members>*</members>
         <name>StaticResource</name>
     </types>
     <version>54.0</version>
