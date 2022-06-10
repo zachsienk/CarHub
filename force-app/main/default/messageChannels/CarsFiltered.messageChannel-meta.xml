@@ -5,6 +5,6 @@
     <lightningMessageFields>
         <description>Current car filters</description>
         <fieldName>filters</fieldName>
-        <masterLabel>CarsFiltered</masterLabel>
     </lightningMessageFields>
+    <masterLabel>CarsFiltered</masterLabel>
 </LightningMessageChannel>

@@ -36,5 +36,6 @@ export default class CarTileList extends LightningElement {
        }
        handleFilterChanges(message){
            console.log(message.filters)
+           this.filters={...message.filters}
        }
 }
