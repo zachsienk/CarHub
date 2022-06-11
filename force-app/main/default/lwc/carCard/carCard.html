@@ -1,6 +1,8 @@
 <template>
     <lightning-card title={carName} icon-name="standard:apex_plugin">
+       
         <template if:true={recordId}>
+            <lightning-button-icon icon-name="utility:expand_alt" slot="actions" onclick={handleNaviateToRecord}></lightning-button-icon>
             <div class="slds-m-horizontal_medium">
                 <img src={carPictureUrl} alt="Car picture"/>
                 <lightning-record-view-form onload={handleRecordLoaded} record-id={recordId} object-api-name="Car__c" density="compact">
